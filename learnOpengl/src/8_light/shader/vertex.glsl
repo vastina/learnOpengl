@@ -12,9 +12,9 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 void main(){
-gl_Position =  projection * view * model * trans1 * vec4(_gl_position, 1.0);
+fragpos = vec3(model * trans1 * vec4(_gl_position, 1.0) ); 
+gl_Position =  projection * view * vec4(fragpos, 1.0);
 texture_coord = _texture_coord;
 out_color = _out_color;
-normal =  vec3(model * trans1 * vec4(_normal, 1.0) );
-fragpos = vec3(model * trans1 * vec4(_gl_position, 1.0) );
+normal =  mat3(transpose(inverse(model*trans1))) * _normal ;
 }
