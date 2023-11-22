@@ -23,19 +23,19 @@ void processInput(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
+	cameraspeed = static_cast<float>(3.5 * deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-		camerapos -= ws * speed;
+		camerapos -= ws * cameraspeed;
 	}
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-		camerapos += ws * speed;
+		camerapos += ws * cameraspeed;
 	}
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-		camerapos += ad * speed;
+		camerapos += ad * cameraspeed;
 	}
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-		camerapos -= ad * speed;
+		camerapos -= ad * cameraspeed;
 	}
-    float cameraSpeed = static_cast<float>(2.5 * deltaTime);//to do...
 }
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
@@ -133,10 +133,10 @@ int main() {
 		glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		float currentFrame = static_cast<float>(glfwGetTime());
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
 		processInput(w);
-		//float currentFrame = static_cast<float>(glfwGetTime());
-		//deltaTime = currentFrame - lastFrame;
-		//lastFrame = currentFrame;
 
 		glActiveTexture(GL_TEXTURE0); glBindTexture(GL_TEXTURE_2D, texture1);
 		glActiveTexture(GL_TEXTURE1); glBindTexture(GL_TEXTURE_2D, texture2);
@@ -160,8 +160,6 @@ int main() {
 				0.0f, 0.0f, 0.0f, 1.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.ID, "trans1"), 1, GL_FALSE, glm::value_ptr(transform));
 
-		
-
         glm::mat4 view = glm::mat4(1.0f);
         view = glm::rotate(view, glm::radians(yaw+90.0f), glm::vec3(0.0, 1.0, 0.0));
         view = glm::rotate(view, glm::radians(pitch), ad);
@@ -172,6 +170,8 @@ int main() {
         projection = glm::perspective((float)glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
 		shader.setMat4("projection", projection);
 
+		shader.setFloat("ambientStrength", 0.1 + 0.01 * sin(t));
+		shader.setVec3("viewpos", camerapos);
 		glBindVertexArray(vao);
 
 		glm::mat4 model = glm::mat4(1.0f);
@@ -187,6 +187,7 @@ int main() {
 		}
 
 		lightshader.use();
+		lightshader.setMat4("trans1", transform);
 		lightshader.setMat4("projection", projection);
 		lightshader.setMat4("view", view);
 		model = glm::mat4(1.0f);
