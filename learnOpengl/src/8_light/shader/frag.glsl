@@ -2,9 +2,18 @@
 out vec4 frag_color;
 in vec2 texture_coord;
 in vec3 out_color;
+in vec3 normal;
+in vec3 fragpos;
 uniform sampler2D texture1;
 uniform sampler2D texture2;
-uniform vec3 lightcolor;
+uniform float ambientStrength = 0.1;
+uniform vec3 lightpos = vec3(5.0, 5.0, 5.0); 
+uniform vec4 light_fragcolor = vec4(1.0, 1.0, 1.0, 1.0);
+vec3 norm;	vec3 lightDir;
 void main(){
-frag_color = mix(texture(texture1, texture_coord), texture(texture2, texture_coord), 0.2) * vec4(lightcolor,1.0) * vec4(out_color, 1.0) ;
+norm = normalize(normal);
+lightDir = normalize(lightpos - fragpos);
+float diff = max(dot(norm, lightDir), 0.0);
+vec4 result = (diff + ambientStrength) * light_fragcolor;
+frag_color = mix(texture(texture1, texture_coord), texture(texture2, texture_coord), 0.2) * result * vec4(out_color, 1.0);
 }
