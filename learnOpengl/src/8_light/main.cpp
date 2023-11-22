@@ -65,34 +65,40 @@ int main() {
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) return -1; 
 	glfwSetInputMode(w, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
+	Shader lightshader("C:/Users/vastina/Desktop/learnOpengl/learnOpengl/src/8_light/shader/light_vertex.glsl",
+		"C:/Users/vastina/Desktop/learnOpengl/learnOpengl/src/8_light/shader/light_fragcolor.glsl");
+	unsigned int lightvao, lightvbo;
+	glGenVertexArrays(1, &lightvao);
+	glGenBuffers(1, &lightvbo);
+	glBindVertexArray(lightvao);
+	glBindBuffer(GL_ARRAY_BUFFER, lightvbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(lightvertices), lightvertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
 	Shader shader("C:/Users/vastina/Desktop/learnOpengl/learnOpengl/src/8_light/shader/vertex.glsl",
 		"C:/Users/vastina/Desktop/learnOpengl/learnOpengl/src/8_light/shader/frag.glsl");
-
 	unsigned int vbo, vao/*, ebo*/;
 	glGenVertexArrays(1, &vao);
 	glGenBuffers(1, &vbo);  //glGenBuffers(1, &ebo);
-
 	glBindVertexArray(vao);
-
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5 * sizeof(float)));
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(5 * sizeof(float)));
 	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(8 * sizeof(float)));
+	glEnableVertexAttribArray(3);
 
 	stbi_set_flip_vertically_on_load(true);
 
 	int width, height, nrchannels;  unsigned int texture1, texture2;
 	glGenTextures(1, &texture1); glBindTexture(GL_TEXTURE_2D, texture1);
-	// 设置环绕和过滤方式
-	//float borderColor[] = { 0.3f, 0.1f, 0.7f, 1.0f };
-	//glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -124,7 +130,7 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(w))
 	{
-		glClearColor(0.30f, 0.15f, 0.65f, 1.0f);
+		glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		processInput(w);
@@ -154,8 +160,7 @@ int main() {
 				0.0f, 0.0f, 0.0f, 1.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.ID, "trans1"), 1, GL_FALSE, glm::value_ptr(transform));
 
-		glm::vec3 lightcolor = glm::vec3(sin(t), 0.2, cos(t) );
-		shader.setVec3("lightcolor", lightcolor);
+		
 
         glm::mat4 view = glm::mat4(1.0f);
         view = glm::rotate(view, glm::radians(yaw+90.0f), glm::vec3(0.0, 1.0, 0.0));
@@ -169,10 +174,10 @@ int main() {
 
 		glBindVertexArray(vao);
 
+		glm::mat4 model = glm::mat4(1.0f);
 		for (unsigned int i = 0; i < 10; i++)
 		{
-			// calculate the model matrix for each object and pass it to shader before drawing
-			glm::mat4 model = glm::mat4(1.0f);
+			model = glm::mat4(1.0f);
 			model = glm::translate(model, cubePositions[i]);
 			float angle = 20.0f * (float)i;
 			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 1.5f, 0.0f));
@@ -181,12 +186,24 @@ int main() {
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 
+		lightshader.use();
+		lightshader.setMat4("projection", projection);
+		lightshader.setMat4("view", view);
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, lightPos);
+		model = glm::scale(model, glm::vec3(0.2f)); 
+		lightshader.setMat4("model", model);
+		glBindVertexArray(lightvao);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
 		glfwSwapBuffers(w);
-		glfwPollEvents(); 
+		glfwPollEvents();  
 	}
 
 	glDeleteVertexArrays(1, &vao);
 	glDeleteBuffers(1, &vbo);
+	glDeleteVertexArrays(1, &lightvao);
+	glDeleteBuffers(1, &lightvbo);
 	//glDeleteBuffers(1, &ebo);
 
 	glfwTerminate();
