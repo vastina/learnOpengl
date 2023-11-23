@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <VCToolsVersion>
     </VCToolsVersion>
@@ -37,7 +37,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <VCToolsVersion>
@@ -240,10 +240,22 @@
     <ClInclude Include="dependencies\glm\common.hpp" />
     <ClInclude Include="dependencies\glm\detail\compute_common.hpp" />
     <ClInclude Include="dependencies\glm\detail\compute_vector_relational.hpp" />
+    <ClInclude Include="dependencies\glm\detail\func_common.hpp" />
+    <ClInclude Include="dependencies\glm\detail\func_exponential.hpp" />
+    <ClInclude Include="dependencies\glm\detail\func_geometric.hpp" />
+    <ClInclude Include="dependencies\glm\detail\func_integer.hpp" />
+    <ClInclude Include="dependencies\glm\detail\func_matrix.hpp" />
+    <ClInclude Include="dependencies\glm\detail\func_packing.hpp" />
+    <ClInclude Include="dependencies\glm\detail\func_trigonometric.hpp" />
+    <ClInclude Include="dependencies\glm\detail\func_vector_relational.hpp" />
+    <ClInclude Include="dependencies\glm\detail\precision.hpp" />
     <ClInclude Include="dependencies\glm\detail\qualifier.hpp" />
     <ClInclude Include="dependencies\glm\detail\setup.hpp" />
     <ClInclude Include="dependencies\glm\detail\type_float.hpp" />
+    <ClInclude Include="dependencies\glm\detail\type_gentype.hpp" />
     <ClInclude Include="dependencies\glm\detail\type_half.hpp" />
+    <ClInclude Include="dependencies\glm\detail\type_int.hpp" />
+    <ClInclude Include="dependencies\glm\detail\type_mat.hpp" />
     <ClInclude Include="dependencies\glm\detail\type_mat2x2.hpp" />
     <ClInclude Include="dependencies\glm\detail\type_mat2x3.hpp" />
     <ClInclude Include="dependencies\glm\detail\type_mat2x4.hpp" />
@@ -254,6 +266,7 @@
     <ClInclude Include="dependencies\glm\detail\type_mat4x3.hpp" />
     <ClInclude Include="dependencies\glm\detail\type_mat4x4.hpp" />
     <ClInclude Include="dependencies\glm\detail\type_quat.hpp" />
+    <ClInclude Include="dependencies\glm\detail\type_vec.hpp" />
     <ClInclude Include="dependencies\glm\detail\type_vec1.hpp" />
     <ClInclude Include="dependencies\glm\detail\type_vec2.hpp" />
     <ClInclude Include="dependencies\glm\detail\type_vec3.hpp" />
@@ -413,6 +426,7 @@
     <ClInclude Include="dependencies\glm\gtc\color_space.hpp" />
     <ClInclude Include="dependencies\glm\gtc\constants.hpp" />
     <ClInclude Include="dependencies\glm\gtc\epsilon.hpp" />
+    <ClInclude Include="dependencies\glm\gtc\functions.hpp" />
     <ClInclude Include="dependencies\glm\gtc\integer.hpp" />
     <ClInclude Include="dependencies\glm\gtc\matrix_access.hpp" />
     <ClInclude Include="dependencies\glm\gtc\matrix_integer.hpp" />
@@ -534,7 +548,7 @@
     <ClInclude Include="dependencies\tool\model.h" />
     <ClInclude Include="dependencies\tool\shader.h" />
     <ClInclude Include="dependencies\tool\stb_image.h" />
-    <ClInclude Include="src\8_light\global_statement.h" />
+    <ClInclude Include="src\8_light_2\global_statement.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dependencies\assimp\color4.inl" />
@@ -560,7 +574,9 @@
     <None Include="dependencies\glm\detail\func_trigonometric_simd.inl" />
     <None Include="dependencies\glm\detail\func_vector_relational.inl" />
     <None Include="dependencies\glm\detail\func_vector_relational_simd.inl" />
+    <None Include="dependencies\glm\detail\type_gentype.inl" />
     <None Include="dependencies\glm\detail\type_half.inl" />
+    <None Include="dependencies\glm\detail\type_mat.inl" />
     <None Include="dependencies\glm\detail\type_mat2x2.inl" />
     <None Include="dependencies\glm\detail\type_mat2x3.inl" />
     <None Include="dependencies\glm\detail\type_mat2x4.inl" />
@@ -573,6 +589,7 @@
     <None Include="dependencies\glm\detail\type_mat4x4_simd.inl" />
     <None Include="dependencies\glm\detail\type_quat.inl" />
     <None Include="dependencies\glm\detail\type_quat_simd.inl" />
+    <None Include="dependencies\glm\detail\type_vec.inl" />
     <None Include="dependencies\glm\detail\type_vec1.inl" />
     <None Include="dependencies\glm\detail\type_vec2.inl" />
     <None Include="dependencies\glm\detail\type_vec3.inl" />
@@ -602,9 +619,11 @@
     <None Include="dependencies\glm\ext\vector_relational.inl" />
     <None Include="dependencies\glm\ext\vector_ulp.inl" />
     <None Include="dependencies\glm\gtc\bitfield.inl" />
+    <None Include="dependencies\glm\gtc\color_encoding.inl" />
     <None Include="dependencies\glm\gtc\color_space.inl" />
     <None Include="dependencies\glm\gtc\constants.inl" />
     <None Include="dependencies\glm\gtc\epsilon.inl" />
+    <None Include="dependencies\glm\gtc\functions.inl" />
     <None Include="dependencies\glm\gtc\integer.inl" />
     <None Include="dependencies\glm\gtc\matrix_access.inl" />
     <None Include="dependencies\glm\gtc\matrix_inverse.inl" />
@@ -619,6 +638,7 @@
     <None Include="dependencies\glm\gtc\type_precision.inl" />
     <None Include="dependencies\glm\gtc\type_ptr.inl" />
     <None Include="dependencies\glm\gtc\ulp.inl" />
+    <None Include="dependencies\glm\gtc\vec1.inl" />
     <None Include="dependencies\glm\gtx\associated_min_max.inl" />
     <None Include="dependencies\glm\gtx\bit.inl" />
     <None Include="dependencies\glm\gtx\closest_point.inl" />
@@ -682,8 +702,10 @@
     <None Include="dependencies\glm\gtx\wrap.inl" />
     <None Include="dependencies\lib-vc2019\glfw3.dll" />
     <None Include="dependencies\lib-vc2022\glfw3.dll" />
-    <None Include="src\8_light\shader\frag.glsl" />
-    <None Include="src\8_light\shader\vertex.glsl" />
+    <None Include="src\8_light_2\shader\frag.glsl" />
+    <None Include="src\8_light_2\shader\light_fragcolor.glsl" />
+    <None Include="src\8_light_2\shader\light_vertex.glsl" />
+    <None Include="src\8_light_2\shader\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="dependencies\lib-vc2019\glfw3.lib" />
@@ -699,6 +721,7 @@
     <Text Include="src\5_transformation\resource\texture2.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dependencies\glm\detail\dummy.cpp" />
     <ClCompile Include="dependencies\glm\detail\glm.cpp" />
     <ClCompile Include="dependencies\imgui\imgui.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_demo.cpp" />
@@ -706,15 +729,14 @@
     <ClCompile Include="dependencies\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="src\8_light\glad.c" />
-    <ClCompile Include="src\8_light\main.cpp" />
+    <ClCompile Include="src\8_light_2\glad.c" />
+    <ClCompile Include="src\8_light_2\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\5_transformation\resource\2.jpg" />
     <Image Include="src\5_transformation\resource\3.jpg" />
     <Image Include="src\5_transformation\resource\4.jpg" />
     <Image Include="src\5_transformation\resource\5.jpg" />
-    <Image Include="src\5_transformation\resource\a.png" />
     <Image Include="src\5_transformation\resource\awesomeface.png" />
     <Image Include="src\5_transformation\resource\container.jpg" />
     <Image Include="static\pictures\3.jpg" />

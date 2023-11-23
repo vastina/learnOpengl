@@ -1041,7 +1041,49 @@
     <ClInclude Include="dependencies\glm\simd\vector_relational.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\8_light\global_statement.h">
+    <ClInclude Include="dependencies\glm\detail\func_common.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\detail\func_exponential.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\detail\func_geometric.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\detail\func_integer.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\detail\func_matrix.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\detail\func_packing.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\detail\func_trigonometric.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\detail\func_vector_relational.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\detail\precision.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\detail\type_gentype.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\detail\type_int.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\detail\type_mat.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\detail\type_vec.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\glm\gtc\functions.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\8_light_2\global_statement.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1477,8 +1519,28 @@
     <None Include="dependencies\glm\gtx\wrap.inl">
       <Filter>头文件</Filter>
     </None>
-    <None Include="src\8_light\shader\frag.glsl" />
-    <None Include="src\8_light\shader\vertex.glsl" />
+    <None Include="dependencies\glm\detail\type_gentype.inl">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="dependencies\glm\detail\type_mat.inl">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="dependencies\glm\detail\type_vec.inl">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="dependencies\glm\gtc\color_encoding.inl">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="dependencies\glm\gtc\functions.inl">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="dependencies\glm\gtc\vec1.inl">
+      <Filter>头文件</Filter>
+    </None>
+    <None Include="src\8_light_2\shader\frag.glsl" />
+    <None Include="src\8_light_2\shader\light_fragcolor.glsl" />
+    <None Include="src\8_light_2\shader\light_vertex.glsl" />
+    <None Include="src\8_light_2\shader\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="dependencies\lib-vc2022\glfw3.lib" />
@@ -1515,10 +1577,13 @@
     <ClCompile Include="dependencies\glm\detail\glm.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\8_light\glad.c">
+    <ClCompile Include="dependencies\glm\detail\dummy.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\8_light\main.cpp">
+    <ClCompile Include="src\8_light_2\glad.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\8_light_2\main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1527,9 +1592,6 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="src\5_transformation\resource\awesomeface.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="src\5_transformation\resource\a.png">
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="src\5_transformation\resource\2.jpg">
