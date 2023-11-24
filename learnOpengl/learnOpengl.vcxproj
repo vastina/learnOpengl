@@ -548,7 +548,7 @@
     <ClInclude Include="dependencies\tool\model.h" />
     <ClInclude Include="dependencies\tool\shader.h" />
     <ClInclude Include="dependencies\tool\stb_image.h" />
-    <ClInclude Include="src\8_light_2\global_statement.h" />
+    <ClInclude Include="src\8_light_3\global_statement.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dependencies\assimp\color4.inl" />
@@ -702,10 +702,10 @@
     <None Include="dependencies\glm\gtx\wrap.inl" />
     <None Include="dependencies\lib-vc2019\glfw3.dll" />
     <None Include="dependencies\lib-vc2022\glfw3.dll" />
-    <None Include="src\8_light_2\shader\frag.glsl" />
-    <None Include="src\8_light_2\shader\light_fragcolor.glsl" />
-    <None Include="src\8_light_2\shader\light_vertex.glsl" />
-    <None Include="src\8_light_2\shader\vertex.glsl" />
+    <None Include="src\8_light_3\shader\frag.glsl" />
+    <None Include="src\8_light_3\shader\light_fragcolor.glsl" />
+    <None Include="src\8_light_3\shader\light_vertex.glsl" />
+    <None Include="src\8_light_3\shader\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="dependencies\lib-vc2019\glfw3.lib" />
@@ -729,8 +729,8 @@
     <ClCompile Include="dependencies\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="dependencies\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="src\8_light_2\glad.c" />
-    <ClCompile Include="src\8_light_2\main.cpp" />
+    <ClCompile Include="src\8_light_3\glad.c" />
+    <ClCompile Include="src\8_light_3\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\5_transformation\resource\2.jpg" />
@@ -745,6 +745,8 @@
     <Image Include="static\pictures\a.png" />
     <Image Include="static\pictures\awesomeface.png" />
     <Image Include="static\pictures\container1.jpg" />
+    <Image Include="static\pictures\container2.png" />
+    <Image Include="static\pictures\container2_specular.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
